@@ -1,0 +1,105 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethny Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="Ethny.png" alt="Ethny Logo" class="logo">
+        <button class="join-button">Join waiting list</button>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Generate <span class="highlight">delicious food</span> pictures in one tap</h1>
+            <p>Import your picture or tell the AI which food you want to prepare and let the magic happen</p>
+            <form class="email-form">
+                <input type="email" placeholder="Adresse email" required>
+                <button type="submit">Join waiting list</button>
+            </form>
+        </section>
+        <section class="images-section">
+            <img src="Ethny.svg" alt="Food Image" class="food-images">
+        </section>
+        <section class="info-section">
+            <div class="info-step">
+                <h2>Upload your picture or describe <span class="highlight">the meal of your dream</span></h2>
+                <img src="phone-upload.png" alt="Phone Upload" class="info-image">
+            </div>
+            <div class="info-step">
+                <h2>Get inspired and choose <span class="highlight">the perfect picture for your project</span></h2>
+                <img src="phone-inspiration.png" alt="Phone Inspiration" class="info-image">
+            </div>
+            <div class="info-step">
+                <h2>Adapt and tweak the perfect to fit with your ideas</h2>
+                <img src="phone-adapt.png" alt="Phone Adapt" class="info-image">
+            </div>
+        </section>
+        <section class="signup-section">
+            <h2>Be the first to use the app, join our waiting list</h2>
+            <form class="signup-form">
+                <input type="text" placeholder="Prénom" required>
+                <input type="text" placeholder="Nom" required>
+                <input type="email" placeholder="Adresse e-mail" required>
+                <button type="submit">Join waiting list</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Subscribe to our Beta available soon to try our food design assistant on the following link: ethny.be</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Facebook</a>
+        </div>
+    </footer>
+</body>
+</html>
+
+
